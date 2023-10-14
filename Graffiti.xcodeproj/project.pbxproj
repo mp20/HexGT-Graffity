@@ -1,0 +1,596 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF3A32932ADA04CE00410375 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32922ADA04CE00410375 /* AppDelegate.swift */; };
+		EF3A32952ADA04CE00410375 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3A32942ADA04CE00410375 /* art.scnassets */; };
+		EF3A32972ADA04CE00410375 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32962ADA04CE00410375 /* ViewController.swift */; };
+		EF3A329A2ADA04CE00410375 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3A32982ADA04CE00410375 /* Main.storyboard */; };
+		EF3A329C2ADA04CF00410375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3A329B2ADA04CF00410375 /* Assets.xcassets */; };
+		EF3A32A62ADA04CF00410375 /* GraffitiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32A52ADA04CF00410375 /* GraffitiTests.swift */; };
+		EF3A32B02ADA04CF00410375 /* GraffitiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32AF2ADA04CF00410375 /* GraffitiUITests.swift */; };
+		EF3A32B22ADA04CF00410375 /* GraffitiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32B12ADA04CF00410375 /* GraffitiUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF3A32A22ADA04CF00410375 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF3A32872ADA04CE00410375 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF3A328E2ADA04CE00410375;
+			remoteInfo = Graffiti;
+		};
+		EF3A32AC2ADA04CF00410375 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF3A32872ADA04CE00410375 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF3A328E2ADA04CE00410375;
+			remoteInfo = Graffiti;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EF3A328F2ADA04CE00410375 /* Graffiti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graffiti.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF3A32922ADA04CE00410375 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EF3A32942ADA04CE00410375 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		EF3A32962ADA04CE00410375 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EF3A32992ADA04CE00410375 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EF3A329B2ADA04CF00410375 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF3A32A12ADA04CF00410375 /* GraffitiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraffitiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF3A32A52ADA04CF00410375 /* GraffitiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraffitiTests.swift; sourceTree = "<group>"; };
+		EF3A32AB2ADA04CF00410375 /* GraffitiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraffitiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF3A32AF2ADA04CF00410375 /* GraffitiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraffitiUITests.swift; sourceTree = "<group>"; };
+		EF3A32B12ADA04CF00410375 /* GraffitiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraffitiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF3A328C2ADA04CE00410375 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF3A329E2ADA04CF00410375 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF3A32A82ADA04CF00410375 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF3A32862ADA04CE00410375 = {
+			isa = PBXGroup;
+			children = (
+				EF3A32912ADA04CE00410375 /* Graffiti */,
+				EF3A32A42ADA04CF00410375 /* GraffitiTests */,
+				EF3A32AE2ADA04CF00410375 /* GraffitiUITests */,
+				EF3A32902ADA04CE00410375 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF3A32902ADA04CE00410375 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF3A328F2ADA04CE00410375 /* Graffiti.app */,
+				EF3A32A12ADA04CF00410375 /* GraffitiTests.xctest */,
+				EF3A32AB2ADA04CF00410375 /* GraffitiUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF3A32912ADA04CE00410375 /* Graffiti */ = {
+			isa = PBXGroup;
+			children = (
+				EF3A32922ADA04CE00410375 /* AppDelegate.swift */,
+				EF3A32942ADA04CE00410375 /* art.scnassets */,
+				EF3A32962ADA04CE00410375 /* ViewController.swift */,
+				EF3A32982ADA04CE00410375 /* Main.storyboard */,
+				EF3A329B2ADA04CF00410375 /* Assets.xcassets */,
+			);
+			path = Graffiti;
+			sourceTree = "<group>";
+		};
+		EF3A32A42ADA04CF00410375 /* GraffitiTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF3A32A52ADA04CF00410375 /* GraffitiTests.swift */,
+			);
+			path = GraffitiTests;
+			sourceTree = "<group>";
+		};
+		EF3A32AE2ADA04CF00410375 /* GraffitiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EF3A32AF2ADA04CF00410375 /* GraffitiUITests.swift */,
+				EF3A32B12ADA04CF00410375 /* GraffitiUITestsLaunchTests.swift */,
+			);
+			path = GraffitiUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF3A328E2ADA04CE00410375 /* Graffiti */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF3A32B52ADA04CF00410375 /* Build configuration list for PBXNativeTarget "Graffiti" */;
+			buildPhases = (
+				EF3A328B2ADA04CE00410375 /* Sources */,
+				EF3A328C2ADA04CE00410375 /* Frameworks */,
+				EF3A328D2ADA04CE00410375 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Graffiti;
+			productName = Graffiti;
+			productReference = EF3A328F2ADA04CE00410375 /* Graffiti.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF3A32A02ADA04CF00410375 /* GraffitiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF3A32B82ADA04CF00410375 /* Build configuration list for PBXNativeTarget "GraffitiTests" */;
+			buildPhases = (
+				EF3A329D2ADA04CF00410375 /* Sources */,
+				EF3A329E2ADA04CF00410375 /* Frameworks */,
+				EF3A329F2ADA04CF00410375 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF3A32A32ADA04CF00410375 /* PBXTargetDependency */,
+			);
+			name = GraffitiTests;
+			productName = GraffitiTests;
+			productReference = EF3A32A12ADA04CF00410375 /* GraffitiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EF3A32AA2ADA04CF00410375 /* GraffitiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF3A32BB2ADA04CF00410375 /* Build configuration list for PBXNativeTarget "GraffitiUITests" */;
+			buildPhases = (
+				EF3A32A72ADA04CF00410375 /* Sources */,
+				EF3A32A82ADA04CF00410375 /* Frameworks */,
+				EF3A32A92ADA04CF00410375 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF3A32AD2ADA04CF00410375 /* PBXTargetDependency */,
+			);
+			name = GraffitiUITests;
+			productName = GraffitiUITests;
+			productReference = EF3A32AB2ADA04CF00410375 /* GraffitiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF3A32872ADA04CE00410375 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					EF3A328E2ADA04CE00410375 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					EF3A32A02ADA04CF00410375 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = EF3A328E2ADA04CE00410375;
+					};
+					EF3A32AA2ADA04CF00410375 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = EF3A328E2ADA04CE00410375;
+					};
+				};
+			};
+			buildConfigurationList = EF3A328A2ADA04CE00410375 /* Build configuration list for PBXProject "Graffiti" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF3A32862ADA04CE00410375;
+			productRefGroup = EF3A32902ADA04CE00410375 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF3A328E2ADA04CE00410375 /* Graffiti */,
+				EF3A32A02ADA04CF00410375 /* GraffitiTests */,
+				EF3A32AA2ADA04CF00410375 /* GraffitiUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF3A328D2ADA04CE00410375 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF3A32952ADA04CE00410375 /* art.scnassets in Resources */,
+				EF3A329C2ADA04CF00410375 /* Assets.xcassets in Resources */,
+				EF3A329A2ADA04CE00410375 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF3A329F2ADA04CF00410375 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF3A32A92ADA04CF00410375 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF3A328B2ADA04CE00410375 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF3A32972ADA04CE00410375 /* ViewController.swift in Sources */,
+				EF3A32932ADA04CE00410375 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF3A329D2ADA04CF00410375 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF3A32A62ADA04CF00410375 /* GraffitiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF3A32A72ADA04CF00410375 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF3A32B22ADA04CF00410375 /* GraffitiUITestsLaunchTests.swift in Sources */,
+				EF3A32B02ADA04CF00410375 /* GraffitiUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF3A32A32ADA04CF00410375 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF3A328E2ADA04CE00410375 /* Graffiti */;
+			targetProxy = EF3A32A22ADA04CF00410375 /* PBXContainerItemProxy */;
+		};
+		EF3A32AD2ADA04CF00410375 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF3A328E2ADA04CE00410375 /* Graffiti */;
+			targetProxy = EF3A32AC2ADA04CF00410375 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF3A32982ADA04CE00410375 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF3A32992ADA04CE00410375 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF3A32B32ADA04CF00410375 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EF3A32B42ADA04CF00410375 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF3A32B62ADA04CF00410375 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9QV9CNM7L5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF3A32B72ADA04CF00410375 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9QV9CNM7L5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EF3A32B92ADA04CF00410375 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.GraffitiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Graffiti.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Graffiti";
+			};
+			name = Debug;
+		};
+		EF3A32BA2ADA04CF00410375 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.GraffitiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Graffiti.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Graffiti";
+			};
+			name = Release;
+		};
+		EF3A32BC2ADA04CF00410375 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.GraffitiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Graffiti;
+			};
+			name = Debug;
+		};
+		EF3A32BD2ADA04CF00410375 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.GraffitiUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Graffiti;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF3A328A2ADA04CE00410375 /* Build configuration list for PBXProject "Graffiti" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF3A32B32ADA04CF00410375 /* Debug */,
+				EF3A32B42ADA04CF00410375 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF3A32B52ADA04CF00410375 /* Build configuration list for PBXNativeTarget "Graffiti" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF3A32B62ADA04CF00410375 /* Debug */,
+				EF3A32B72ADA04CF00410375 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF3A32B82ADA04CF00410375 /* Build configuration list for PBXNativeTarget "GraffitiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF3A32B92ADA04CF00410375 /* Debug */,
+				EF3A32BA2ADA04CF00410375 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF3A32BB2ADA04CF00410375 /* Build configuration list for PBXNativeTarget "GraffitiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF3A32BC2ADA04CF00410375 /* Debug */,
+				EF3A32BD2ADA04CF00410375 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF3A32872ADA04CE00410375 /* Project object */;
+}
