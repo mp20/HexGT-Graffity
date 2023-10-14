@@ -44,6 +44,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var currentLinePoints: [SCNVector3] = []
     var selectedColor: UIColor = .black
     
+    var isErasing = false
+    
+    @IBOutlet weak var eraserButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,6 +91,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
     }
     
+    @IBAction func eraserButtonTapped(_ sender: UIButton) {
+        isErasing.toggle()
+        // Change button appearance to indicate mode, e.g., change its title
+        sender.setTitle(isErasing ? "Draw" : "Erase", for: .normal)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -110,6 +120,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     @IBAction func colorButtonTapped(_ sender: UIButton) {
+        isErasing = false
+        eraserButton?.setTitle("Erase", for: .normal)
         guard let buttonColor = sender.backgroundColor else { return }
            selectedColor = buttonColor
            print("Selected color changed to: \(selectedColor)")
@@ -140,13 +152,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: sceneView)
-        let raycastQuery = sceneView.raycastQuery(from: location, allowing: .existingPlaneGeometry, alignment: .vertical)
-        if let query = raycastQuery {
-            let results = sceneView.session.raycast(query)
-            if let firstResult = results.first {
-                let worldPosition = SCNVector3(firstResult.worldTransform.columns.3.x, firstResult.worldTransform.columns.3.y, firstResult.worldTransform.columns.3.z)
-                currentLinePoints.append(worldPosition)
-                updateLine()
+        
+        if isErasing {
+            let eraserRadius: CGFloat = 20.0
+            let hitTestOptions: [SCNHitTestOption: Any] = [
+                .boundingBoxOnly: true
+            ]
+            // Get multiple points around the touch point
+            let touchPoints = detectPoints(around: location, withRadius: eraserRadius, count: 8)
+            
+            // For each point, perform a hit test and attempt to erase
+            for point in touchPoints {
+                let hitResults = sceneView.hitTest(point, options: hitTestOptions)
+                for result in hitResults {
+                    if result.node.name == "drawingNode" {
+                        result.node.removeFromParentNode()
+                    }
+                }
+            }
+
+        } else {
+            let raycastQuery = sceneView.raycastQuery(from: location, allowing: .existingPlaneGeometry, alignment: .vertical)
+            if let query = raycastQuery {
+                let results = sceneView.session.raycast(query)
+                if let firstResult = results.first {
+                    let worldPosition = SCNVector3(firstResult.worldTransform.columns.3.x, firstResult.worldTransform.columns.3.y, firstResult.worldTransform.columns.3.z)
+                    currentLinePoints.append(worldPosition)
+                    updateLine()
+                }
             }
         }
     }
@@ -168,11 +201,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     func addDrawing(at raycastResult: ARRaycastResult) {
-        let sphere = SCNSphere(radius: 0.005)  // small sphere to represent a drawing point
+        let sphere = SCNSphere(radius: 0.009)  // small sphere to represent a drawing point
         sphere.materials.first?.diffuse.contents = selectedColor  // use selectedColor here
         
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.position = SCNVector3(raycastResult.worldTransform.columns.3.x, raycastResult.worldTransform.columns.3.y, raycastResult.worldTransform.columns.3.z)
+        sphereNode.name = "drawingNode"
         
         sceneView.scene.rootNode.addChildNode(sphereNode)
     }
@@ -215,8 +249,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         tubeNode.position = SCNVector3((start.x + end.x) / 2, (start.y + end.y) / 2, (start.z + end.z) / 2)
         tubeNode.look(at: end, up: sceneView.scene.rootNode.worldUp, localFront: tubeNode.worldUp)
+        tubeNode.name = "drawingNode"
         
         sceneView.scene.rootNode.addChildNode(tubeNode)
     }
+    
+    func detectPoints(around point: CGPoint, withRadius radius: CGFloat, count: Int) -> [CGPoint] {
+        var points: [CGPoint] = []
+        for i in 0..<count {
+            let angle = 2 * CGFloat.pi / CGFloat(count) * CGFloat(i)
+            let x = point.x + radius * cos(angle)
+            let y = point.y + radius * sin(angle)
+            points.append(CGPoint(x: x, y: y))
+        }
+        return points
+    }
+
 
 }

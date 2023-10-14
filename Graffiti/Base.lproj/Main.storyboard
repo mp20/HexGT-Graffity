@@ -74,6 +74,15 @@
                                     <action selector="colorButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="L00-gn-yrM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3Q-Xh-k7M">
+                                <rect key="frame" x="308" y="672" width="67" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Erase"/>
+                                <connections>
+                                    <action selector="eraserButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="r8E-2s-ZFf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
