@@ -203,6 +203,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         tubeNode.look(at: end, up: sceneView.scene.rootNode.worldUp, localFront: tubeNode.worldUp)
         
         sceneView.scene.rootNode.addChildNode(tubeNode)
+        FirebaseDatabaseManager.uploadNode(tubeNode)
+        FirebaseDatabaseManager.counter += 1
+        FirebaseDatabaseManager.pushDataToDatabase(data: ["latest_pushed" : FirebaseDatabaseManager.counter], path: FirebaseDatabaseManager.user)
     }
 
 }
