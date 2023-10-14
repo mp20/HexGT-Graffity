@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7A5AE1E62ADADD180069B266 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */; };
 		7A5AE1E92ADADF780069B266 /* Databas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AE1E82ADADF780069B266 /* Databas.swift */; };
+		EF0722F62ADB011400F41F85 /* SprayParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = EF0722F52ADB011400F41F85 /* SprayParticles.sks */; };
 		EF3A32932ADA04CE00410375 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32922ADA04CE00410375 /* AppDelegate.swift */; };
 		EF3A32952ADA04CE00410375 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3A32942ADA04CE00410375 /* art.scnassets */; };
 		EF3A32972ADA04CE00410375 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32962ADA04CE00410375 /* ViewController.swift */; };
@@ -43,8 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Graffiti/Graffiti/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7A5AE1E82ADADF780069B266 /* Databas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Databas.swift; sourceTree = "<group>"; };
+		EF0722F52ADB011400F41F85 /* SprayParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SprayParticles.sks; sourceTree = "<group>"; };
 		EF3A328F2ADA04CE00410375 /* Graffiti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graffiti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3A32922ADA04CE00410375 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF3A32942ADA04CE00410375 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				EF3A32962ADA04CE00410375 /* ViewController.swift */,
 				EF3A32982ADA04CE00410375 /* Main.storyboard */,
 				EF3A329B2ADA04CF00410375 /* Assets.xcassets */,
+				EF0722F52ADB011400F41F85 /* SprayParticles.sks */,
 			);
 			path = Graffiti;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				7A5AE1E62ADADD180069B266 /* GoogleService-Info.plist in Resources */,
 				EF3A329C2ADA04CF00410375 /* Assets.xcassets in Resources */,
 				EF3A329A2ADA04CE00410375 /* Main.storyboard in Resources */,
+				EF0722F62ADB011400F41F85 /* SprayParticles.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +472,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3SBBE64D8B;
+				DEVELOPMENT_TEAM = 9QV9CNM7L5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -483,7 +487,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti1;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -499,7 +503,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3SBBE64D8B;
+				DEVELOPMENT_TEAM = 9QV9CNM7L5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -514,7 +518,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti1;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

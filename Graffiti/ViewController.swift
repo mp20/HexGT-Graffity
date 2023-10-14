@@ -8,191 +8,96 @@
 import UIKit
 import SceneKit
 import ARKit
-import Firebase
-import FirebaseAnalytics
-import FirebaseStorage
-
-
-
-extension SCNGeometry {
-    static func line(from start: SCNVector3, to end: SCNVector3, color: UIColor) -> SCNGeometry {
-          let indices: [Int32] = [0, 1]
-          let source = SCNGeometrySource(vertices: [start, end])
-          let element = SCNGeometryElement(indices: indices, primitiveType: .line)
-          let geometry = SCNGeometry(sources: [source], elements: [element])
-          
-          let material = SCNMaterial()
-          material.diffuse.contents = color
-          geometry.materials = [material]
-          
-          return geometry
-      }
-}
-
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
     @IBOutlet var sceneView: ARSCNView!
     
-    var currentLineNode: SCNNode?
-    var currentLinePoints: [SCNVector3] = []
-    var selectedColor: UIColor = .black
+    var sprayNode: SCNNode?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FirebaseDatabaseManager.shared.observeData(path: "path/to/data") { [weak self] result in
-                   switch result {
-                   case .success(let data):
-                       // Handle the new data
-                       print("Received data: \(data)")
-                       print("///////////////////////////")
-                   case .failure(let error):
-                       // Handle the error
-                       print("Error observing data: \(error)")
-                   }
-               }
-        
-        let dataToWrite: [String: Any] = ["key": "value"] // Your data here
-        FirebaseDatabaseManager.shared.writeData(path: "path/to/data", data: dataToWrite) { error in
-            if let error = error {
-                // Handle the error
-                print("Data could not be written: \(error)")
-            } else {
-                // Data was written successfully
-                print("Data written successfully")
-            }
-        }
-        
-        
-        FirebaseDatabaseManager.shared.readData(path: "path/to/data") { result in
-                    switch result {
-                    case .success(let data):
-                        print("REEEE-Received data: \(data)")
-                    case .failure(let error):
-                        print("Error fetching data: \(error)")
-                    }
-                }
-        
-        // Set the view's delegate
         sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
-        // Run the view's session
-        configuration.planeDetection = .vertical
-
+        configuration.planeDetection = .horizontal
+        
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
         sceneView.session.pause()
     }
-
-    // MARK: - ARSCNViewDelegate
-    
     
     @IBAction func colorButtonTapped(_ sender: UIButton) {
         guard let buttonColor = sender.backgroundColor else { return }
-           selectedColor = buttonColor
-           print("Selected color changed to: \(selectedColor)")
+        
+        if let sprayParticles = SCNParticleSystem(named: "SprayParticles.scnp", inDirectory: nil) {
+            sprayParticles.particleColor = buttonColor
+            sprayNode?.removeAllParticleSystems()
+            sprayNode?.addParticleSystem(sprayParticles)
+        }
     }
-
-    
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-        
-        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        plane.materials.first?.diffuse.contents = UIColor.white.withAlphaComponent(0.5)  // semi-transparent white to represent whiteboard
-        
-        let planeNode = SCNNode(geometry: plane)
-        planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-        planeNode.eulerAngles.x = -.pi / 2
-        
-        node.addChildNode(planeNode)
-    }
-
-
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        currentLinePoints.removeAll()  // Start a new line
-    }
-
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: sceneView)
-        let raycastQuery = sceneView.raycastQuery(from: location, allowing: .existingPlaneGeometry, alignment: .vertical)
-        if let query = raycastQuery {
-            let results = sceneView.session.raycast(query)
-            if let firstResult = results.first {
-                let worldPosition = SCNVector3(firstResult.worldTransform.columns.3.x, firstResult.worldTransform.columns.3.y, firstResult.worldTransform.columns.3.z)
-                currentLinePoints.append(worldPosition)
-                updateLine()
+        let results = sceneView.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal)
+        
+        if let query = results {
+            let hitResults = sceneView.session.raycast(query)
+            if let hitResult = hitResults.first {
+                let worldPosition = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+                createSprayNode(at: worldPosition)
             }
         }
     }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        currentLineNode = nil  // End the current line
-    }
     
-    func updateLine() {
-        guard currentLinePoints.count >= 2 else { return }
-            
-            if currentLineNode == nil {
-                let line = SCNGeometry.line(from: currentLinePoints[0], to: currentLinePoints[1], color: selectedColor)
-                currentLineNode = SCNNode(geometry: line)
-                sceneView.scene.rootNode.addChildNode(currentLineNode!)
-            } else {
-                let newLine = SCNGeometry.line(from: currentLinePoints[currentLinePoints.count - 2], to: currentLinePoints.last!, color: selectedColor)
-                let newNode = SCNNode(geometry: newLine)
-                currentLineNode!.addChildNode(newNode)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: sceneView)
+        let results = sceneView.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal)
+        
+        if let query = results {
+            let hitResults = sceneView.session.raycast(query)
+            if let hitResult = hitResults.first {
+                let worldPosition = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+                moveSprayNode(to: worldPosition)
             }
-    }
-
-    
-    
-    func addDrawing(at raycastResult: ARRaycastResult) {
-        let sphere = SCNSphere(radius: 0.005)  // small sphere to represent a drawing point
-        sphere.materials.first?.diffuse.contents = selectedColor  // use selectedColor here
-        
-        let sphereNode = SCNNode(geometry: sphere)
-        sphereNode.position = SCNVector3(raycastResult.worldTransform.columns.3.x, raycastResult.worldTransform.columns.3.y, raycastResult.worldTransform.columns.3.z)
-        
-        sceneView.scene.rootNode.addChildNode(sphereNode)
-    }
-
-    
-
-    
-    
-    
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
+        }
     }
     
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        stopSpraying()
     }
     
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
+    func createSprayNode(at position: SCNVector3) {
+        if let sprayParticles = SCNParticleSystem(named: "SprayParticles.scnp", inDirectory: nil) {
+            print("Particle system created")
+            sprayNode = SCNNode()
+            sprayNode?.position = position
+            sprayNode?.addParticleSystem(sprayParticles)
+            sceneView.scene.rootNode.addChildNode(sprayNode!)
+            print("Spray node added to scene")
+        } else {
+            print("Failed to print")
+        }
+    }
+    
+    func moveSprayNode(to position: SCNVector3) {
+        sprayNode?.position = position
+    }
+    
+    func stopSpraying() {
+        sprayNode?.removeAllParticleSystems()
+        sprayNode = nil
     }
 }
