@@ -13,12 +13,18 @@ import FirebaseAnalytics
 import FirebaseStorage
 
 extension SCNGeometry {
-    static func line(from start: SCNVector3, to end: SCNVector3) -> SCNGeometry {
-        let indices: [Int32] = [0, 1]
-        let source = SCNGeometrySource(vertices: [start, end])
-        let element = SCNGeometryElement(indices: indices, primitiveType: .line)
-        return SCNGeometry(sources: [source], elements: [element])
-    }
+    static func line(from start: SCNVector3, to end: SCNVector3, color: UIColor) -> SCNGeometry {
+          let indices: [Int32] = [0, 1]
+          let source = SCNGeometrySource(vertices: [start, end])
+          let element = SCNGeometryElement(indices: indices, primitiveType: .line)
+          let geometry = SCNGeometry(sources: [source], elements: [element])
+          
+          let material = SCNMaterial()
+          material.diffuse.contents = color
+          geometry.materials = [material]
+          
+          return geometry
+      }
 }
 
 
@@ -64,7 +70,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func colorButtonTapped(_ sender: UIButton) {
         guard let buttonColor = sender.backgroundColor else { return }
-        selectedColor = buttonColor
+           selectedColor = buttonColor
+           print("Selected color changed to: \(selectedColor)")
     }
 
     
@@ -108,17 +115,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func updateLine() {
-        guard currentLinePoints.count >= 2 else { return }  // Need at least two points to create a line
-        
-        if currentLineNode == nil {
-            let line = SCNGeometry.line(from: currentLinePoints[0], to: currentLinePoints[1])
-            currentLineNode = SCNNode(geometry: line)
-            sceneView.scene.rootNode.addChildNode(currentLineNode!)
-        } else {
-            let newLine = SCNGeometry.line(from: currentLinePoints[currentLinePoints.count - 2], to: currentLinePoints.last!)
-            let newNode = SCNNode(geometry: newLine)
-            currentLineNode!.addChildNode(newNode)
-        }
+        guard currentLinePoints.count >= 2 else { return }
+            
+            if currentLineNode == nil {
+                let line = SCNGeometry.line(from: currentLinePoints[0], to: currentLinePoints[1], color: selectedColor)
+                currentLineNode = SCNNode(geometry: line)
+                sceneView.scene.rootNode.addChildNode(currentLineNode!)
+            } else {
+                let newLine = SCNGeometry.line(from: currentLinePoints[currentLinePoints.count - 2], to: currentLinePoints.last!, color: selectedColor)
+                let newNode = SCNNode(geometry: newLine)
+                currentLineNode!.addChildNode(newNode)
+            }
     }
 
     
@@ -133,6 +140,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(sphereNode)
     }
 
+    
 
     
     
