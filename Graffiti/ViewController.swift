@@ -8,6 +8,9 @@
 import UIKit
 import SceneKit
 import ARKit
+import Firebase
+import FirebaseAnalytics
+import FirebaseStorage
 
 extension SCNGeometry {
     static func line(from start: SCNVector3, to end: SCNVector3) -> SCNGeometry {
@@ -18,12 +21,14 @@ extension SCNGeometry {
     }
 }
 
+
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
     var currentLineNode: SCNNode?
     var currentLinePoints: [SCNVector3] = []
+    var selectedColor: UIColor = .black
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +38,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +66,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard let buttonColor = sender.backgroundColor else { return }
         selectedColor = buttonColor
     }
-    
+
     
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -126,7 +125,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func addDrawing(at raycastResult: ARRaycastResult) {
         let sphere = SCNSphere(radius: 0.005)  // small sphere to represent a drawing point
-        sphere.materials.first?.diffuse.contents = UIColor.black  // drawing color
+        sphere.materials.first?.diffuse.contents = selectedColor  // use selectedColor here
         
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.position = SCNVector3(raycastResult.worldTransform.columns.3.x, raycastResult.worldTransform.columns.3.y, raycastResult.worldTransform.columns.3.z)
