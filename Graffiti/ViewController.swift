@@ -8,15 +8,27 @@
 import UIKit
 import SceneKit
 import ARKit
+import Firebase
+import FirebaseAnalytics
+import FirebaseStorage
+
+
 
 extension SCNGeometry {
-    static func line(from start: SCNVector3, to end: SCNVector3) -> SCNGeometry {
-        let indices: [Int32] = [0, 1]
-        let source = SCNGeometrySource(vertices: [start, end])
-        let element = SCNGeometryElement(indices: indices, primitiveType: .line)
-        return SCNGeometry(sources: [source], elements: [element])
-    }
+    static func line(from start: SCNVector3, to end: SCNVector3, color: UIColor) -> SCNGeometry {
+          let indices: [Int32] = [0, 1]
+          let source = SCNGeometrySource(vertices: [start, end])
+          let element = SCNGeometryElement(indices: indices, primitiveType: .line)
+          let geometry = SCNGeometry(sources: [source], elements: [element])
+          
+          let material = SCNMaterial()
+          material.diffuse.contents = color
+          geometry.materials = [material]
+          
+          return geometry
+      }
 }
+
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
@@ -24,21 +36,49 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var currentLineNode: SCNNode?
     var currentLinePoints: [SCNVector3] = []
+    var selectedColor: UIColor = .black
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        FirebaseDatabaseManager.shared.observeData(path: "path/to/data") { [weak self] result in
+                   switch result {
+                   case .success(let data):
+                       // Handle the new data
+                       print("Received data: \(data)")
+                       print("///////////////////////////")
+                   case .failure(let error):
+                       // Handle the error
+                       print("Error observing data: \(error)")
+                   }
+               }
+        
+        let dataToWrite: [String: Any] = ["key": "value"] // Your data here
+        FirebaseDatabaseManager.shared.writeData(path: "path/to/data", data: dataToWrite) { error in
+            if let error = error {
+                // Handle the error
+                print("Data could not be written: \(error)")
+            } else {
+                // Data was written successfully
+                print("Data written successfully")
+            }
+        }
+        
+        
+        FirebaseDatabaseManager.shared.readData(path: "path/to/data") { result in
+                    switch result {
+                    case .success(let data):
+                        print("REEEE-Received data: \(data)")
+                    case .failure(let error):
+                        print("Error fetching data: \(error)")
+                    }
+                }
         
         // Set the view's delegate
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,9 +105,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func colorButtonTapped(_ sender: UIButton) {
         guard let buttonColor = sender.backgroundColor else { return }
-        selectedColor = buttonColor
+           selectedColor = buttonColor
+           print("Selected color changed to: \(selectedColor)")
     }
-    
+
     
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -109,24 +150,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func updateLine() {
-        guard currentLinePoints.count >= 2 else { return }  // Need at least two points to create a line
-        
-        if currentLineNode == nil {
-            let line = SCNGeometry.line(from: currentLinePoints[0], to: currentLinePoints[1])
-            currentLineNode = SCNNode(geometry: line)
-            sceneView.scene.rootNode.addChildNode(currentLineNode!)
-        } else {
-            let newLine = SCNGeometry.line(from: currentLinePoints[currentLinePoints.count - 2], to: currentLinePoints.last!)
-            let newNode = SCNNode(geometry: newLine)
-            currentLineNode!.addChildNode(newNode)
-        }
+        guard currentLinePoints.count >= 2 else { return }
+            
+            if currentLineNode == nil {
+                let line = SCNGeometry.line(from: currentLinePoints[0], to: currentLinePoints[1], color: selectedColor)
+                currentLineNode = SCNNode(geometry: line)
+                sceneView.scene.rootNode.addChildNode(currentLineNode!)
+            } else {
+                let newLine = SCNGeometry.line(from: currentLinePoints[currentLinePoints.count - 2], to: currentLinePoints.last!, color: selectedColor)
+                let newNode = SCNNode(geometry: newLine)
+                currentLineNode!.addChildNode(newNode)
+            }
     }
 
     
     
     func addDrawing(at raycastResult: ARRaycastResult) {
         let sphere = SCNSphere(radius: 0.005)  // small sphere to represent a drawing point
-        sphere.materials.first?.diffuse.contents = UIColor.black  // drawing color
+        sphere.materials.first?.diffuse.contents = selectedColor  // use selectedColor here
         
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.position = SCNVector3(raycastResult.worldTransform.columns.3.x, raycastResult.worldTransform.columns.3.y, raycastResult.worldTransform.columns.3.z)
@@ -134,6 +175,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(sphereNode)
     }
 
+    
 
     
     

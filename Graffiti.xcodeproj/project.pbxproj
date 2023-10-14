@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A5AE1E62ADADD180069B266 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */; };
+		7A5AE1E92ADADF780069B266 /* Databas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AE1E82ADADF780069B266 /* Databas.swift */; };
 		EF3A32932ADA04CE00410375 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32922ADA04CE00410375 /* AppDelegate.swift */; };
 		EF3A32952ADA04CE00410375 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3A32942ADA04CE00410375 /* art.scnassets */; };
 		EF3A32972ADA04CE00410375 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32962ADA04CE00410375 /* ViewController.swift */; };
@@ -15,6 +17,12 @@
 		EF3A32A62ADA04CF00410375 /* GraffitiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32A52ADA04CF00410375 /* GraffitiTests.swift */; };
 		EF3A32B02ADA04CF00410375 /* GraffitiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32AF2ADA04CF00410375 /* GraffitiUITests.swift */; };
 		EF3A32B22ADA04CF00410375 /* GraffitiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32B12ADA04CF00410375 /* GraffitiUITestsLaunchTests.swift */; };
+		EF3A32C22ADA3EB000410375 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EF3A32C12ADA3EB000410375 /* FirebaseAnalytics */; };
+		EF3A32C42ADA3EB000410375 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EF3A32C32ADA3EB000410375 /* FirebaseDatabase */; };
+		EF3A32C62ADA3EB000410375 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EF3A32C52ADA3EB000410375 /* FirebaseDatabaseSwift */; };
+		EF3A32C82ADA3EB000410375 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = EF3A32C72ADA3EB000410375 /* FirebaseInstallations */; };
+		EF3A32CA2ADA3EB000410375 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EF3A32C92ADA3EB000410375 /* FirebaseStorage */; };
+		EF3A32CC2ADA3EB000410375 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EF3A32CB2ADA3EB000410375 /* FirebaseStorageCombine-Community */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7A5AE1E82ADADF780069B266 /* Databas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Databas.swift; sourceTree = "<group>"; };
 		EF3A328F2ADA04CE00410375 /* Graffiti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graffiti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3A32922ADA04CE00410375 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF3A32942ADA04CE00410375 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -53,6 +63,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF3A32C62ADA3EB000410375 /* FirebaseDatabaseSwift in Frameworks */,
+				EF3A32C42ADA3EB000410375 /* FirebaseDatabase in Frameworks */,
+				EF3A32C22ADA3EB000410375 /* FirebaseAnalytics in Frameworks */,
+				EF3A32CA2ADA3EB000410375 /* FirebaseStorage in Frameworks */,
+				EF3A32CC2ADA3EB000410375 /* FirebaseStorageCombine-Community in Frameworks */,
+				EF3A32C82ADA3EB000410375 /* FirebaseInstallations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A5AE1E72ADADF380069B266 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				7A5AE1E82ADADF780069B266 /* Databas.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		EF3A32862ADA04CE00410375 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +120,8 @@
 		EF3A32912ADA04CE00410375 /* Graffiti */ = {
 			isa = PBXGroup;
 			children = (
+				7A5AE1E72ADADF380069B266 /* Database */,
+				7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */,
 				EF3A32922ADA04CE00410375 /* AppDelegate.swift */,
 				EF3A32942ADA04CE00410375 /* art.scnassets */,
 				EF3A32962ADA04CE00410375 /* ViewController.swift */,
@@ -138,6 +164,14 @@
 			dependencies = (
 			);
 			name = Graffiti;
+			packageProductDependencies = (
+				EF3A32C12ADA3EB000410375 /* FirebaseAnalytics */,
+				EF3A32C32ADA3EB000410375 /* FirebaseDatabase */,
+				EF3A32C52ADA3EB000410375 /* FirebaseDatabaseSwift */,
+				EF3A32C72ADA3EB000410375 /* FirebaseInstallations */,
+				EF3A32C92ADA3EB000410375 /* FirebaseStorage */,
+				EF3A32CB2ADA3EB000410375 /* FirebaseStorageCombine-Community */,
+			);
 			productName = Graffiti;
 			productReference = EF3A328F2ADA04CE00410375 /* Graffiti.app */;
 			productType = "com.apple.product-type.application";
@@ -210,6 +244,9 @@
 				Base,
 			);
 			mainGroup = EF3A32862ADA04CE00410375;
+			packageReferences = (
+				EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = EF3A32902ADA04CE00410375 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -227,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF3A32952ADA04CE00410375 /* art.scnassets in Resources */,
+				7A5AE1E62ADADD180069B266 /* GoogleService-Info.plist in Resources */,
 				EF3A329C2ADA04CF00410375 /* Assets.xcassets in Resources */,
 				EF3A329A2ADA04CE00410375 /* Main.storyboard in Resources */,
 			);
@@ -255,6 +293,7 @@
 			files = (
 				EF3A32972ADA04CE00410375 /* ViewController.swift in Sources */,
 				EF3A32932ADA04CE00410375 /* AppDelegate.swift in Sources */,
+				7A5AE1E92ADADF780069B266 /* Databas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,12 +465,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9QV9CNM7L5;
+				DEVELOPMENT_TEAM = 3SBBE64D8B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -442,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -455,12 +496,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9QV9CNM7L5;
+				DEVELOPMENT_TEAM = 3SBBE64D8B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -471,7 +514,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti;
+				PRODUCT_BUNDLE_IDENTIFIER = gitgood.Graffiti1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -591,6 +634,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.16.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF3A32C12ADA3EB000410375 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		EF3A32C32ADA3EB000410375 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		EF3A32C52ADA3EB000410375 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		EF3A32C72ADA3EB000410375 /* FirebaseInstallations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseInstallations;
+		};
+		EF3A32C92ADA3EB000410375 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		EF3A32CB2ADA3EB000410375 /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF3A32C02ADA340100410375 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EF3A32872ADA04CE00410375 /* Project object */;
 }
