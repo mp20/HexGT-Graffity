@@ -40,45 +40,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        FirebaseDatabaseManager.shared.observeData(path: "path/to/data") { [weak self] result in
-                   switch result {
-                   case .success(let data):
-                       // Handle the new data
-                       print("Received data: \(data)")
-                       print("///////////////////////////")
-                   case .failure(let error):
-                       // Handle the error
-                       print("Error observing data: \(error)")
-                   }
-               }
-        
-        let dataToWrite: [String: Any] = ["key": "value"] // Your data here
-        FirebaseDatabaseManager.shared.writeData(path: "path/to/data", data: dataToWrite) { error in
-            if let error = error {
-                // Handle the error
-                print("Data could not be written: \(error)")
-            } else {
-                // Data was written successfully
-                print("Data written successfully")
-            }
-        }
-        
-        
-        FirebaseDatabaseManager.shared.readData(path: "path/to/data") { result in
-                    switch result {
-                    case .success(let data):
-                        print("REEEE-Received data: \(data)")
-                    case .failure(let error):
-                        print("Error fetching data: \(error)")
+
+        FirebaseDatabaseManager.initializeCounter() { [weak self] in
+            guard let self = self else { return }
+
+            print(FirebaseDatabaseManager.counter)
+
+            for i in 0...Int(FirebaseDatabaseManager.counter) {
+                var string_num = String(i)
+                let path = "Ariya/" + string_num
+                FirebaseDatabaseManager.downloadData(from: path) { (data) in
+                    if let downloadedData = data,
+                       let node = FirebaseDatabaseManager.unarchiveNode(from: downloadedData) {
+                        self.sceneView.scene.rootNode.addChildNode(node)
                     }
                 }
-        
-        // Set the view's delegate
-        sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+            }
+
+            FirebaseDatabaseManager.counter += 1
+
+            // Set the view's delegate
+            self.sceneView.delegate = self
+            
+            // Show statistics such as fps and timing information
+            self.sceneView.showsStatistics = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,18 +127,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let worldPosition = SCNVector3(firstResult.worldTransform.columns.3.x, firstResult.worldTransform.columns.3.y, firstResult.worldTransform.columns.3.z)
                 currentLinePoints.append(worldPosition)
                 updateLine()
+                
             }
         }
     }
+    
+    
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("ENDDDDDDD")
+        if let unwrappedNode = currentLineNode {
+            FirebaseDatabaseManager.uploadNode(unwrappedNode)
+            FirebaseDatabaseManager.pushDataToDatabase(data: ["latest_pushed" : FirebaseDatabaseManager.counter], path: FirebaseDatabaseManager.user)
+        } else {
+            // Handle the case where currentLineNode is nil.
+            print("currentLineNode is nil")
+        }
         currentLineNode = nil  // End the current line
     }
     
     func updateLine() {
         guard currentLinePoints.count >= 2 else { return }
-            
+//        print(currentLineNode?.position)
+//        print(currentLineNode?.childNodes)
             if currentLineNode == nil {
+                print("QQQQQQ")
                 let line = SCNGeometry.line(from: currentLinePoints[0], to: currentLinePoints[1], color: selectedColor)
                 currentLineNode = SCNNode(geometry: line)
                 sceneView.scene.rootNode.addChildNode(currentLineNode!)
@@ -163,24 +162,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
     }
 
-    
-    
-    func addDrawing(at raycastResult: ARRaycastResult) {
-        let sphere = SCNSphere(radius: 0.005)  // small sphere to represent a drawing point
-        sphere.materials.first?.diffuse.contents = selectedColor  // use selectedColor here
-        
-        let sphereNode = SCNNode(geometry: sphere)
-        sphereNode.position = SCNVector3(raycastResult.worldTransform.columns.3.x, raycastResult.worldTransform.columns.3.y, raycastResult.worldTransform.columns.3.z)
-        
-        sceneView.scene.rootNode.addChildNode(sphereNode)
-    }
-
-    
-
-    
-    
-    
-    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
