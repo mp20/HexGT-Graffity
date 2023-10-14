@@ -12,6 +12,8 @@ import Firebase
 import FirebaseAnalytics
 import FirebaseStorage
 
+
+
 extension SCNGeometry {
     static func line(from start: SCNVector3, to end: SCNVector3, color: UIColor) -> SCNGeometry {
           let indices: [Int32] = [0, 1]
@@ -38,6 +40,39 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        FirebaseDatabaseManager.shared.observeData(path: "path/to/data") { [weak self] result in
+                   switch result {
+                   case .success(let data):
+                       // Handle the new data
+                       print("Received data: \(data)")
+                       print("///////////////////////////")
+                   case .failure(let error):
+                       // Handle the error
+                       print("Error observing data: \(error)")
+                   }
+               }
+        
+        let dataToWrite: [String: Any] = ["key": "value"] // Your data here
+        FirebaseDatabaseManager.shared.writeData(path: "path/to/data", data: dataToWrite) { error in
+            if let error = error {
+                // Handle the error
+                print("Data could not be written: \(error)")
+            } else {
+                // Data was written successfully
+                print("Data written successfully")
+            }
+        }
+        
+        
+        FirebaseDatabaseManager.shared.readData(path: "path/to/data") { result in
+                    switch result {
+                    case .success(let data):
+                        print("REEEE-Received data: \(data)")
+                    case .failure(let error):
+                        print("Error fetching data: \(error)")
+                    }
+                }
         
         // Set the view's delegate
         sceneView.delegate = self

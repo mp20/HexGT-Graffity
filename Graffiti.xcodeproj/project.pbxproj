@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A5AE1E62ADADD180069B266 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */; };
+		7A5AE1E92ADADF780069B266 /* Databas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5AE1E82ADADF780069B266 /* Databas.swift */; };
 		EF3A32932ADA04CE00410375 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32922ADA04CE00410375 /* AppDelegate.swift */; };
 		EF3A32952ADA04CE00410375 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3A32942ADA04CE00410375 /* art.scnassets */; };
 		EF3A32972ADA04CE00410375 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3A32962ADA04CE00410375 /* ViewController.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7A5AE1E82ADADF780069B266 /* Databas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Databas.swift; sourceTree = "<group>"; };
 		EF3A328F2ADA04CE00410375 /* Graffiti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graffiti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3A32922ADA04CE00410375 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF3A32942ADA04CE00410375 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -85,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A5AE1E72ADADF380069B266 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				7A5AE1E82ADADF780069B266 /* Databas.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		EF3A32862ADA04CE00410375 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +120,8 @@
 		EF3A32912ADA04CE00410375 /* Graffiti */ = {
 			isa = PBXGroup;
 			children = (
+				7A5AE1E72ADADF380069B266 /* Database */,
+				7A5AE1E52ADADD180069B266 /* GoogleService-Info.plist */,
 				EF3A32922ADA04CE00410375 /* AppDelegate.swift */,
 				EF3A32942ADA04CE00410375 /* art.scnassets */,
 				EF3A32962ADA04CE00410375 /* ViewController.swift */,
@@ -250,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF3A32952ADA04CE00410375 /* art.scnassets in Resources */,
+				7A5AE1E62ADADD180069B266 /* GoogleService-Info.plist in Resources */,
 				EF3A329C2ADA04CF00410375 /* Assets.xcassets in Resources */,
 				EF3A329A2ADA04CE00410375 /* Main.storyboard in Resources */,
 			);
@@ -278,6 +293,7 @@
 			files = (
 				EF3A32972ADA04CE00410375 /* ViewController.swift in Sources */,
 				EF3A32932ADA04CE00410375 /* AppDelegate.swift in Sources */,
+				7A5AE1E92ADADF780069B266 /* Databas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
