@@ -29,6 +29,12 @@ extension SCNGeometry {
       }
 }
 
+extension SCNVector3 {
+    func distance(to point: SCNVector3) -> CGFloat {
+        return CGFloat(sqrt(pow(self.x - point.x, 2) + pow(self.y - point.y, 2) + pow(self.z - point.z, 2)))
+    }
+}
+
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
@@ -148,8 +154,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func updateLine() {
         guard currentLinePoints.count >= 2 else { return }
-//        print(currentLineNode?.position)
-//        print(currentLineNode?.childNodes)
             if currentLineNode == nil {
                 print("QQQQQQ")
                 let line = SCNGeometry.line(from: currentLinePoints[0], to: currentLinePoints[1], color: selectedColor)
@@ -160,6 +164,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let newNode = SCNNode(geometry: newLine)
                 currentLineNode!.addChildNode(newNode)
             }
+        let startPoint = currentLinePoints[currentLinePoints.count - 2]
+        let endPoint = currentLinePoints.last!
+        addTube(from: startPoint, to: endPoint, radius: 0.005, color: selectedColor)  // Adjust the radius as needed
     }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -176,4 +183,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+
+    func tube(from start: SCNVector3, to end: SCNVector3, radius: CGFloat, color: UIColor) -> SCNGeometry {
+        let height = start.distance(to: end)
+        let cylinder = SCNCylinder(radius: radius, height: height)
+        
+        let material = SCNMaterial()
+        material.diffuse.contents = color
+        cylinder.materials = [material]
+
+        return cylinder
+    }
+
+    func addTube(from start: SCNVector3, to end: SCNVector3, radius: CGFloat, color: UIColor) {
+        let tubeGeometry = tube(from: start, to: end, radius: radius, color: color)
+        let tubeNode = SCNNode(geometry: tubeGeometry)
+
+        tubeNode.position = SCNVector3((start.x + end.x) / 2, (start.y + end.y) / 2, (start.z + end.z) / 2)
+        tubeNode.look(at: end, up: sceneView.scene.rootNode.worldUp, localFront: tubeNode.worldUp)
+        
+        sceneView.scene.rootNode.addChildNode(tubeNode)
+    }
+
 }
