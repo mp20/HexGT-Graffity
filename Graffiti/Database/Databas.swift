@@ -22,13 +22,15 @@ class FirebaseDatabaseManager {
     private let storage = Storage.storage().reference()
     
     static var user = "Ariya"
+    static var other_user = "Azhan"
     static var counter = 0
+    static var otherUserCounter = 0
     
     static func initializeCounter(completion: @escaping () -> Void) {
-        FirebaseDatabaseManager.pullDataFromDatabase(path: "Ariya") { (data) in
+        FirebaseDatabaseManager.pullDataFromDatabase(path: user) { (data) in
             if let dictionary = data, let counterValue = dictionary["latest_pushed"] as? Int {
+                print("COUNTER:" + String(counterValue))
                 counter = counterValue
-                print(counter)
                 completion()
             }
         }
@@ -113,6 +115,36 @@ class FirebaseDatabaseManager {
             }
             completion(dictionary)
         }
+    }
+    
+    static func listAllFiles(sceneView: ARSCNView!) {
+        // Create a reference to the folder
+        let storageRef = Storage.storage().reference().child(other_user)
+
+        // List all files in the folder
+        storageRef.listAll { (result, error) in
+            if let error = error {
+                print("Error listing files: \(error)")
+                return
+            }
+
+            // Safely unwrap the result
+            guard let unwrappedResult = result else {
+                print("No result found.")
+                return
+            }
+
+            for item in unwrappedResult.items {
+                let filePath = "\(other_user)/\(item.name)"
+                FirebaseDatabaseManager.downloadData(from: filePath) { (data) in
+                    if let downloadedData = data,
+                       let node = FirebaseDatabaseManager.unarchiveNode(from: downloadedData) {
+                        otherUserCounter+=1
+                        sceneView.scene.rootNode.addChildNode(node)
+                }
+            }
+        }
+    }
     }
     
 }

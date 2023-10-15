@@ -43,10 +43,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var currentLineNode: SCNNode?
     var currentLinePoints: [SCNVector3] = []
     var selectedColor: UIColor = .black
-    
+    var displayContentTimer: Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
-
         FirebaseDatabaseManager.initializeCounter() { [weak self] in
             guard let self = self else { return }
 
@@ -54,7 +53,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
             for i in 0...Int(FirebaseDatabaseManager.counter) {
                 var string_num = String(i)
-                let path = "Ariya/" + string_num
+                let path = FirebaseDatabaseManager.user + "/" + string_num
                 FirebaseDatabaseManager.downloadData(from: path) { (data) in
                     if let downloadedData = data,
                        let node = FirebaseDatabaseManager.unarchiveNode(from: downloadedData) {
@@ -62,9 +61,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                 }
             }
+            
+            FirebaseDatabaseManager.listAllFiles(sceneView: self.sceneView)
 
             FirebaseDatabaseManager.counter += 1
-
+                
+            scheduleDisplayContentTimer()
             // Set the view's delegate
             self.sceneView.delegate = self
             
@@ -84,6 +86,52 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         sceneView.session.run(configuration)
     }
+    
+    func scheduleDisplayContentTimer() {
+        displayContentTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(displayContent), userInfo: nil, repeats: true)
+    }
+
+    // This function will be called every 10 seconds
+    @objc func displayContent() {
+        print("Here now")
+        
+        FirebaseDatabaseManager.pullDataFromDatabase(path: FirebaseDatabaseManager.other_user) { (data) in
+            var c = 0
+            if let dictionary = data, let counterValue = dictionary["latest_pushed"] as? Int {
+                print("COUNTER:" + String(counterValue))
+                c = counterValue
+            }
+
+            // Now that we have the value of 'c', we can start the while loop.
+            while c >= FirebaseDatabaseManager.otherUserCounter {
+                print(FirebaseDatabaseManager.otherUserCounter)
+                FirebaseDatabaseManager.otherUserCounter += 1
+                let path = "\(FirebaseDatabaseManager.other_user)/\(FirebaseDatabaseManager.otherUserCounter)"
+                
+                // Use a semaphore to make the asynchronous call synchronous within the loop
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                FirebaseDatabaseManager.downloadData(from: path) { data in
+                    DispatchQueue.main.async {
+                        if let node = data as? Data {
+                            let newnode = FirebaseDatabaseManager.unarchiveNode(from: node)
+                            self.sceneView.scene.rootNode.addChildNode(newnode!)
+                            
+                        } else {
+                            print("Error encountered")
+                        }
+                        semaphore.signal()
+                    }
+                }
+                
+                // Termination condition (Edit this condition as per your requirements)
+                
+                print("C" + String(c))
+                print(FirebaseDatabaseManager.otherUserCounter)
+            }
+        }
+    }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -133,7 +181,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let worldPosition = SCNVector3(firstResult.worldTransform.columns.3.x, firstResult.worldTransform.columns.3.y, firstResult.worldTransform.columns.3.z)
                 currentLinePoints.append(worldPosition)
                 updateLine()
-                
             }
         }
     }
@@ -149,6 +196,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Handle the case where currentLineNode is nil.
             print("currentLineNode is nil")
         }
+        print(FirebaseDatabaseManager.counter)
         currentLineNode = nil  // End the current line
     }
     
