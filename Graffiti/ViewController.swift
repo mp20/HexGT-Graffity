@@ -43,10 +43,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var currentLineNode: SCNNode?
     var currentLinePoints: [SCNVector3] = []
     var selectedColor: UIColor = .black
-    
+    var displayContentTimer: Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
-
         FirebaseDatabaseManager.initializeCounter() { [weak self] in
             guard let self = self else { return }
 
@@ -54,7 +53,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
             for i in 0...Int(FirebaseDatabaseManager.counter) {
                 var string_num = String(i)
-                let path = "Ariya/" + string_num
+                let path = FirebaseDatabaseManager.user + "/" + string_num
                 FirebaseDatabaseManager.downloadData(from: path) { (data) in
                     if let downloadedData = data,
                        let node = FirebaseDatabaseManager.unarchiveNode(from: downloadedData) {
@@ -62,9 +61,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                 }
             }
+            
+            FirebaseDatabaseManager.listAllFiles(sceneView: self.sceneView)
 
             FirebaseDatabaseManager.counter += 1
-
+                
+            scheduleDisplayContentTimer()
             // Set the view's delegate
             self.sceneView.delegate = self
             
@@ -83,6 +85,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         configuration.planeDetection = .vertical
 
         sceneView.session.run(configuration)
+    }
+    
+    func scheduleDisplayContentTimer() {
+        displayContentTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(displayContent), userInfo: nil, repeats: true)
+    }
+
+    // This function will be called every 10 seconds
+    @objc func displayContent() {
+        print("Here now")
+        
+        let path = "\(FirebaseDatabaseManager.user)/\(FirebaseDatabaseManager.otherUserCounter)"
+        FirebaseDatabaseManager.downloadData(from: path) { data in
+            DispatchQueue.main.async {
+                if let node = data as? Data {
+                    let newnode = FirebaseDatabaseManager.unarchiveNode(from: node)
+                    self.sceneView.scene.rootNode.addChildNode(newnode!)
+                    FirebaseDatabaseManager.otherUserCounter += 1
+                    self.displayContent() // Recursively call the function to fetch the next data
+                } else {
+                    // Stop the recursive calls when an error is encountered
+                    print("Error encountered. Stopping data fetch.")
+                }
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -133,7 +159,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let worldPosition = SCNVector3(firstResult.worldTransform.columns.3.x, firstResult.worldTransform.columns.3.y, firstResult.worldTransform.columns.3.z)
                 currentLinePoints.append(worldPosition)
                 updateLine()
-                
             }
         }
     }
@@ -149,6 +174,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Handle the case where currentLineNode is nil.
             print("currentLineNode is nil")
         }
+        print(FirebaseDatabaseManager.counter)
         currentLineNode = nil  // End the current line
     }
     
