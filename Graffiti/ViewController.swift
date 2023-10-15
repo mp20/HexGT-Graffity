@@ -99,6 +99,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         while shouldContinueFetching {
             print(FirebaseDatabaseManager.otherUserCounter)
+            FirebaseDatabaseManager.otherUserCounter += 1
             let path = "\(FirebaseDatabaseManager.user)/\(FirebaseDatabaseManager.otherUserCounter)"
             
             // Use a semaphore to make the asynchronous call synchronous within the loop
@@ -109,7 +110,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     if let node = data as? Data {
                         let newnode = FirebaseDatabaseManager.unarchiveNode(from: node)
                         self.sceneView.scene.rootNode.addChildNode(newnode!)
-                        FirebaseDatabaseManager.otherUserCounter += 1
+                        
                     } else {
                         print("Error encountered")
                     }
@@ -118,7 +119,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
             // Wait for the asynchronous call to complete
-            semaphore.wait()
             var c = 0
             // Termination condition (Edit this condition as per your requirements)
             FirebaseDatabaseManager.pullDataFromDatabase(path: FirebaseDatabaseManager.other_user + "/" + "latest_pushed", completion: { (data: [String : Any]?) in
@@ -130,7 +130,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     print("Data is nil or not available.")
                 }
             })
-            if  c == FirebaseDatabaseManager.otherUserCounter {
+            if  c <= FirebaseDatabaseManager.otherUserCounter {
                 shouldContinueFetching = false
             }
         }
