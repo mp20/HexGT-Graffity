@@ -21,8 +21,8 @@ class FirebaseDatabaseManager {
     private let database = Database.database().reference()
     private let storage = Storage.storage().reference()
     
-    static var user = "Ariya"
-    static var other_user = "Azhan"
+    static var user = "Azhan"
+    static var other_user = "Ariya"
     static var counter = 0
     static var otherUserCounter = 0
     

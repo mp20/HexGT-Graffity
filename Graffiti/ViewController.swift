@@ -95,18 +95,43 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func displayContent() {
         print("Here now")
         
-        let path = "\(FirebaseDatabaseManager.user)/\(FirebaseDatabaseManager.otherUserCounter)"
-        FirebaseDatabaseManager.downloadData(from: path) { data in
-            DispatchQueue.main.async {
-                if let node = data as? Data {
-                    let newnode = FirebaseDatabaseManager.unarchiveNode(from: node)
-                    self.sceneView.scene.rootNode.addChildNode(newnode!)
-                    FirebaseDatabaseManager.otherUserCounter += 1
-                    self.displayContent() // Recursively call the function to fetch the next data
-                } else {
-                    // Stop the recursive calls when an error is encountered
-                    print("Error encountered. Stopping data fetch.")
+        var shouldContinueFetching = true
+        
+        while shouldContinueFetching {
+            print(FirebaseDatabaseManager.otherUserCounter)
+            let path = "\(FirebaseDatabaseManager.user)/\(FirebaseDatabaseManager.otherUserCounter)"
+            
+            // Use a semaphore to make the asynchronous call synchronous within the loop
+            let semaphore = DispatchSemaphore(value: 0)
+            
+            FirebaseDatabaseManager.downloadData(from: path) { data in
+                DispatchQueue.main.async {
+                    if let node = data as? Data {
+                        let newnode = FirebaseDatabaseManager.unarchiveNode(from: node)
+                        self.sceneView.scene.rootNode.addChildNode(newnode!)
+                        FirebaseDatabaseManager.otherUserCounter += 1
+                    } else {
+                        print("Error encountered")
+                    }
+                    semaphore.signal()
                 }
+            }
+            
+            // Wait for the asynchronous call to complete
+            semaphore.wait()
+            var c = 0
+            // Termination condition (Edit this condition as per your requirements)
+            FirebaseDatabaseManager.pullDataFromDatabase(path: FirebaseDatabaseManager.other_user + "/" + "latest_pushed", completion: { (data: [String : Any]?) in
+                // Handle the data or any other operations here
+                if let unwrappedData = data {
+                    print(unwrappedData)
+                    print("-------------------------")
+                } else {
+                    print("Data is nil or not available.")
+                }
+            })
+            if  c == FirebaseDatabaseManager.otherUserCounter {
+                shouldContinueFetching = false
             }
         }
     }
