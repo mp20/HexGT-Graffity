@@ -123,8 +123,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Termination condition (Edit this condition as per your requirements)
             FirebaseDatabaseManager.pullDataFromDatabase(path: FirebaseDatabaseManager.other_user + "/" + "latest_pushed", completion: { (data: [String : Any]?) in
                 // Handle the data or any other operations here
-                if let unwrappedData = data {
-                    print(unwrappedData)
+                if let unwrappedData = data, let stringValue = unwrappedData["yourKey"] as? String, let intValue = Int(stringValue) {
+                    c = intValue
                     print("-------------------------")
                 } else {
                     print("Data is nil or not available.")
