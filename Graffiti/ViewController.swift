@@ -106,7 +106,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             while c >= FirebaseDatabaseManager.otherUserCounter {
                 print(FirebaseDatabaseManager.otherUserCounter)
                 FirebaseDatabaseManager.otherUserCounter += 1
-                let path = "\(FirebaseDatabaseManager.user)/\(FirebaseDatabaseManager.otherUserCounter)"
+                let path = "\(FirebaseDatabaseManager.other_user)/\(FirebaseDatabaseManager.otherUserCounter)"
                 
                 // Use a semaphore to make the asynchronous call synchronous within the loop
                 let semaphore = DispatchSemaphore(value: 0)
