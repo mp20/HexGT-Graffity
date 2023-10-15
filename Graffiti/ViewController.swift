@@ -95,46 +95,43 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func displayContent() {
         print("Here now")
         
-        var shouldContinueFetching = true
-        
-        while shouldContinueFetching {
-            print(FirebaseDatabaseManager.otherUserCounter)
-            FirebaseDatabaseManager.otherUserCounter += 1
-            let path = "\(FirebaseDatabaseManager.user)/\(FirebaseDatabaseManager.otherUserCounter)"
-            
-            // Use a semaphore to make the asynchronous call synchronous within the loop
-            let semaphore = DispatchSemaphore(value: 0)
-            
-            FirebaseDatabaseManager.downloadData(from: path) { data in
-                DispatchQueue.main.async {
-                    if let node = data as? Data {
-                        let newnode = FirebaseDatabaseManager.unarchiveNode(from: node)
-                        self.sceneView.scene.rootNode.addChildNode(newnode!)
-                        
-                    } else {
-                        print("Error encountered")
-                    }
-                    semaphore.signal()
-                }
-            }
-            
-            // Wait for the asynchronous call to complete
+        FirebaseDatabaseManager.pullDataFromDatabase(path: FirebaseDatabaseManager.other_user) { (data) in
             var c = 0
-            // Termination condition (Edit this condition as per your requirements)
-            FirebaseDatabaseManager.pullDataFromDatabase(path: FirebaseDatabaseManager.other_user + "/" + "latest_pushed", completion: { (data: [String : Any]?) in
-                // Handle the data or any other operations here
-                if let unwrappedData = data, let stringValue = unwrappedData["yourKey"] as? String, let intValue = Int(stringValue) {
-                    c = intValue
-                    print("-------------------------")
-                } else {
-                    print("Data is nil or not available.")
+            if let dictionary = data, let counterValue = dictionary["latest_pushed"] as? Int {
+                print("COUNTER:" + String(counterValue))
+                c = counterValue
+            }
+
+            // Now that we have the value of 'c', we can start the while loop.
+            while c >= FirebaseDatabaseManager.otherUserCounter {
+                print(FirebaseDatabaseManager.otherUserCounter)
+                FirebaseDatabaseManager.otherUserCounter += 1
+                let path = "\(FirebaseDatabaseManager.user)/\(FirebaseDatabaseManager.otherUserCounter)"
+                
+                // Use a semaphore to make the asynchronous call synchronous within the loop
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                FirebaseDatabaseManager.downloadData(from: path) { data in
+                    DispatchQueue.main.async {
+                        if let node = data as? Data {
+                            let newnode = FirebaseDatabaseManager.unarchiveNode(from: node)
+                            self.sceneView.scene.rootNode.addChildNode(newnode!)
+                            
+                        } else {
+                            print("Error encountered")
+                        }
+                        semaphore.signal()
+                    }
                 }
-            })
-            if  c <= FirebaseDatabaseManager.otherUserCounter {
-                shouldContinueFetching = false
+                
+                // Termination condition (Edit this condition as per your requirements)
+                
+                print("C" + String(c))
+                print(FirebaseDatabaseManager.otherUserCounter)
             }
         }
     }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
